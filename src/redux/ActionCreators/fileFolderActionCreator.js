@@ -48,6 +48,10 @@ const Delete=(payload)=>({
   payload,
 })
 
+const DeleteFolder=(payload)=>({
+  type:types.DELETE_FOLDER,
+  payload,
+})
 
 
 // Action creators
@@ -112,6 +116,7 @@ export const createFile = (data, setSuccess) => (dispatch) => {
       const fileId = file.id;
       dispatch(addFile({ data: fileData, docId: fileId }));
       setSuccess(true);
+      dispatch(setLoading(true));
       alert("File created Successfully");
     })
     .catch((e) => {
@@ -173,7 +178,18 @@ export const uploadFile = (file, data, setSuccess) => (dispatch) => {
 export const deleteFile = (fileId) => async (dispatch) => {
   try {
     await fire.firestore().collection("files").doc(fileId).delete();
-    dispatch(Delete(fileId));
+    dispatch(DeleteFolder(fileId));
+    dispatch(setLoading(true));
+  } catch (error) {
+    console.error("Error deleting file:", error);
+     }
+};
+
+export const deleteFolders = (docId) => async (dispatch) => {
+  try {
+    await fire.firestore().collection("folders").doc(docId).delete();
+    dispatch(Delete(docId));
+    dispatch(setLoading(true));
   } catch (error) {
     console.error("Error deleting file:", error);
      }

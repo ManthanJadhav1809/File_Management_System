@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { signUpUser } from '../../redux/ActionCreators/authActionCreators';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function RegisterForm() {
     const [name,setName]=useState(""); 
@@ -17,7 +18,10 @@ const navigate=useNavigate();
         e.preventDefault();
         if(!name||!email || !password ||!passwordConfirmation)
         {
-            alert("Please fill The all fields");
+            toast.error('Please fill The all fields', {
+                position: 'top-right',
+              });
+            // alert("Please fill The all fields");
             return;
         }
         if(password != passwordConfirmation){

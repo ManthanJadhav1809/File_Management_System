@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { signInUser } from '../../redux/ActionCreators/authActionCreators';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
   const [email,setEmail]=useState("");
@@ -15,7 +16,10 @@ export default function LoginForm() {
   const handelSubmit=(e)=>{
     e.preventDefault();
     if(!email || !password){
-      alert("Please fill The all fields");
+      toast.error('Please fill The all fields',{
+        position: 'top-right',
+      })
+      // alert("Please fill The all fields");
       return;
     }
     else{

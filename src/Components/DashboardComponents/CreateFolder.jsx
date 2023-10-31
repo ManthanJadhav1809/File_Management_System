@@ -1,11 +1,12 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { creatFolder } from "../../redux/ActionCreators/fileFolderActionCreator";
 
 export default function CreateFolder({ setIsCreateFolderModalOpen }) {
   const [folderName, setFolderName] = useState("");
+  const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
   const { userFolders, user, currentFolder, currentFolderData } = useSelector(
     (state) => ({
@@ -18,6 +19,8 @@ export default function CreateFolder({ setIsCreateFolderModalOpen }) {
     }),
     shallowEqual
   );
+
+
 
   const checkFolderAlreadyExits = (name) => {
     // if (currentFolder === "root") {
@@ -59,6 +62,7 @@ export default function CreateFolder({ setIsCreateFolderModalOpen }) {
           };
           console.log(data);
           dispatch(creatFolder(data));
+          setIsCreateFolderModalOpen(false);
         } else {
           alert("folder already present");
         }

@@ -7,7 +7,8 @@ import DashboardPage from './Pages/DashboardPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { checkIsLoggedIn } from './redux/ActionCreators/authActionCreators';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 function App() {
 
   const dispatch=useDispatch();
@@ -17,6 +18,7 @@ function App() {
   },[])
   return (
     <div className="App">
+      <ToastContainer></ToastContainer>
       <Routes>
         <Route path="/" element={<HomePage/>}></Route>
         <Route path="/login" element={<Login/>}></Route>

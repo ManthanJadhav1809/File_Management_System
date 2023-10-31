@@ -3,15 +3,18 @@ import {
   faFileAlt,
   faFileUpload,
   faFolderPlus,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import "./SubBar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { chageFolder } from "../../../redux/ActionCreators/fileFolderActionCreator";
+import { chageFolder, deleteFile } from "../../../redux/ActionCreators/fileFolderActionCreator";
+import { useState } from "react";
 
 export default function SubBar({setShowSubBar, setIsCreateFolderModalOpen,setIsFileUploadModalOpen,setIsCreateFileModalOpen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
 
   const { currentFolder, currentFolderData, userFolders } = useSelector(
     (state) => ({
@@ -24,10 +27,13 @@ export default function SubBar({setShowSubBar, setIsCreateFolderModalOpen,setIsF
     shallowEqual
   );
 
+
   const handleNavigate = (link, id) => {
     navigate(link);
     dispatch(chageFolder(id));
   };
+
+  
 
   return (
     <nav className="navbar py-2 px-5 navbar-expand-lg mt-2 py-2 navbar-light bg-white">
@@ -68,7 +74,6 @@ export default function SubBar({setShowSubBar, setIsCreateFolderModalOpen,setIsF
           )}
         </ol>
       </nav>
-
       <ul className="navbar-nav ms-auto me-5">
         <li className="nav-item ms-2">
           <button className="btn btn-outline-dark"

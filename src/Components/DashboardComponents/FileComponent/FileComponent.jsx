@@ -47,8 +47,8 @@ export default function FileComponent({ setShowSubBar }) {
     if (window.confirm("Are you sure you want to delete this file?")) {
       dispatch(deleteFile(fileId));
       alert("File deleted successfully");
-      setShowSubBar(true); // Set setShowSubBar to true
-      navigate(-1);
+      // setShowSubBar(true); // Set setShowSubBar to true
+      // navigate(-1);
     }
   };
 

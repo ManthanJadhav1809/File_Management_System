@@ -10,4 +10,5 @@ export const CREATE_FILES="CREATE_FILES";
 export const ADD_FILE="ADD_FILE";
 export const SET_FILE_DATA="SET_FILE_DATA";
 export const DELETE_FILE="DELETE_FILE";
-// export const UPDATE_FILE_LIST="UPDATE_FILE_LIST"
+export const DELETE_FOLDER="DELETE_FOLDER";
+
