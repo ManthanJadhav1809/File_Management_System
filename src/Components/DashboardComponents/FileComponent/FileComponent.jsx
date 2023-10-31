@@ -11,6 +11,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteFile } from "../../../redux/ActionCreators/fileFolderActionCreator";
+import { toast } from "react-toastify";
 
 export default function FileComponent({ setShowSubBar }) {
   const { fileId } = useParams();
@@ -32,9 +33,10 @@ export default function FileComponent({ setShowSubBar }) {
     const element = document.createElement("a");
     element.setAttribute(
       "href",
-      "data:text/plain;charset=utf-8" + encodeURIComponent(fileData)
+      currentFile.data.url
+      // "data:text/plain;charset=utf-8" + encodeURIComponent(fileData)
     );
-    element.setAttribute("download", currentFile.data.url);
+    element.setAttribute("download", currentFile.data.name);
     element.setAttribute("target", "_blank");
     element.style.display = "none";
     document.body.appendChild(element);
@@ -46,7 +48,8 @@ export default function FileComponent({ setShowSubBar }) {
   const handelDeleteFile = (fileId) => {
     if (window.confirm("Are you sure you want to delete this file?")) {
       dispatch(deleteFile(fileId));
-      alert("File deleted successfully");
+      
+
       // setShowSubBar(true); // Set setShowSubBar to true
       // navigate(-1);
     }
@@ -119,6 +122,9 @@ export default function FileComponent({ setShowSubBar }) {
               </div>
             </div>
             <div className="w-100 mt-4">
+              {console.log(
+                currentFile.data.url + "  " + currentFile.data.extension
+              )}
               {currentFile.data.extension.includes("png") ||
               currentFile.data.extension.includes("jpg") ||
               currentFile.data.extension.includes("jpeg") ||
@@ -126,7 +132,7 @@ export default function FileComponent({ setShowSubBar }) {
                 <img
                   src={currentFile.data.url}
                   alt={currentFile.data.name}
-                  className="w-100 h-100"
+                  style={{ width: "100%", height: "auto" }}
                 />
               ) : (
                 <div className="w-100 h-100 d-flex justify-content-center align-item-center">

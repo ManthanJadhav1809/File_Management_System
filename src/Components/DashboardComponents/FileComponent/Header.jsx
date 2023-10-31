@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteFile, updateFileData } from "../../../redux/ActionCreators/fileFolderActionCreator";
+import { toast } from "react-toastify";
 
 export default function Header({setShowSubBar,fileId, fileName,fileData,prevFileData }) {
   const navigate=useNavigate();
@@ -13,7 +14,9 @@ export default function Header({setShowSubBar,fileId, fileName,fileData,prevFile
   
  if (window.confirm("Are you sure you want to delete this file?")) {
       dispatch(deleteFile(fileId));
-      alert("File deleted successfully");
+      toast.success('File Deleted Successfully',{
+        position:'top-right'
+      })
       setShowSubBar(true); // Set setShowSubBar to true
       navigate(-1);
     }

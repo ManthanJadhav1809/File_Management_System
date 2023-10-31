@@ -27,7 +27,7 @@ export default function Showitem({ title, items, type }) {
 
     if(window.confirm("Are you want to delete this folder")){
       dispatch(deleteFolders(docId));
-      alert("Folder deleted successfully");
+      // alert("Folder deleted successfully");
     }
       
       

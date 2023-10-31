@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import fire from "../../config/firebase";
 import * as types from "../ActionTypes/fileFolderActionTypes";
 
@@ -64,7 +65,10 @@ export const creatFolder = (data) => (dispatch) => {
       const folderData = await (await folder.get()).data();
       const folderId = folder.id;
       dispatch(addFolder({ data: folderData, docId: folderId }));
-      alert("folder Created Sucessfully");
+      toast.success('folder created sucessfully',{
+        position:'top-right',
+      })
+      
     });
 };
 
@@ -117,7 +121,10 @@ export const createFile = (data, setSuccess) => (dispatch) => {
       dispatch(addFile({ data: fileData, docId: fileId }));
       setSuccess(true);
       dispatch(setLoading(true));
-      alert("File created Successfully");
+      toast.success('File created sucessfully',{
+        position:'top-right',
+      })
+      // alert("File created Successfully");
     })
     .catch((e) => {
       console.log(e);
@@ -133,10 +140,16 @@ export const updateFileData = (fileId, data) => (dispatch) => {
     .update({ data })
     .then(() => {
       dispatch(setFileData({ fileId, data }));
-      alert("file saved sucessfully");
+      toast.success('File saved sucessfully',{
+        position:'top-right',
+      })
+      
     })
     .catch(() => {
-      alert("something went wrong");
+      toast.error('Something went wrong',{
+        position:'top-right',
+      })
+     
     });
 };
 
@@ -165,7 +178,10 @@ export const uploadFile = (file, data, setSuccess) => (dispatch) => {
           const fileData = await (await file.get()).data();
           const fileId = file.id;
           dispatch(addFile({ data: fileData, docId: fileId }));
-          alert("File Uploaded Sucessfully");
+          toast.success('File uploaded sucessfully',{
+            position:'top-right',
+          })
+          
           setSuccess(true);
         })
         .catch(() => {
@@ -180,8 +196,14 @@ export const deleteFile = (fileId) => async (dispatch) => {
     await fire.firestore().collection("files").doc(fileId).delete();
     dispatch(DeleteFolder(fileId));
     dispatch(setLoading(true));
+    toast.success('File Deleted sucessfully',{
+      position:'top-right',
+    })
   } catch (error) {
-    console.error("Error deleting file:", error);
+    toast.error('Error while deleting file',{
+      position:'top-right',
+    })
+    
      }
 };
 
@@ -190,6 +212,9 @@ export const deleteFolders = (docId) => async (dispatch) => {
     await fire.firestore().collection("folders").doc(docId).delete();
     dispatch(Delete(docId));
     dispatch(setLoading(true));
+    toast.success('File Deleted sucessfully',{
+      position:'top-right',
+    })
   } catch (error) {
     console.error("Error deleting file:", error);
      }

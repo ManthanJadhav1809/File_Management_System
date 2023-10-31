@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Route, Routes, json, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes,  useLocation, useNavigate } from "react-router-dom";
 import NavbarDash from "../Components/DashboardComponents/NavbarDash";
 import SubBar from "../Components/DashboardComponents/SubBar/SubBar";
 import HomeComponent from "../Components/DashboardComponents/HomeComponent";
@@ -36,7 +36,7 @@ export default function DashboardPage() {
     if (!isLoggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [isLoggedIn,navigate]);
 
   useEffect(() => {
     if(isLoading && userId){
@@ -48,7 +48,7 @@ export default function DashboardPage() {
   useEffect(()=>{
      if(pathname.includes("/file/")){
    
-      setShowSubBar(false);
+    setShowSubBar(false);
      }
      
   },[pathname])

@@ -3,13 +3,11 @@ import {
   faFileAlt,
   faFileUpload,
   faFolderPlus,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import "./SubBar.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { chageFolder, deleteFile } from "../../../redux/ActionCreators/fileFolderActionCreator";
-import { useState } from "react";
+import { chageFolder } from "../../../redux/ActionCreators/fileFolderActionCreator";
 
 export default function SubBar({setShowSubBar, setIsCreateFolderModalOpen,setIsFileUploadModalOpen,setIsCreateFileModalOpen }) {
   const navigate = useNavigate();

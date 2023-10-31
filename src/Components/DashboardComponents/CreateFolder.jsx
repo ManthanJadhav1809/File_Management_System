@@ -64,14 +64,23 @@ export default function CreateFolder({ setIsCreateFolderModalOpen }) {
           dispatch(creatFolder(data));
           setIsCreateFolderModalOpen(false);
         } else {
-          alert("folder already present");
+          toast.error('folder already present',{
+            position:'top-right'
+          });
+          // alert("folder already present");
         }
-        alert("Folder created " + folderName);
+        
       } else {
-        alert("File Name must be at least 3 character");
+        toast.error('file Name must be at Least 3 character',{
+          position:'top-right'
+        });
+        // alert("File Name must be at least 3 character");
       }
     } else {
-      alert("Folder name cannot be empty");
+      toast.error('folder name cannot be empty',{
+        position:'top-right'
+      });
+      // alert("Folder name cannot be empty");
     }
   };
   return (
