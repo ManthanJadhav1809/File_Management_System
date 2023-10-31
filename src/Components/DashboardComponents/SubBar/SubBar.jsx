@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { chageFolder } from "../../../redux/ActionCreators/fileFolderActionCreator";
 
-export default function SubBar({ setIsCreateFolderModalOpen,setIsFileUploadModalOpen,setIsCreateFileModalOpen }) {
+export default function SubBar({setShowSubBar, setIsCreateFolderModalOpen,setIsFileUploadModalOpen,setIsCreateFileModalOpen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

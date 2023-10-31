@@ -25,7 +25,7 @@ export default function FolderComponent() {
 
   return (
     <div>
-      {childFolders.length > 0 ? (
+      {childFolders.length  > 0 ? (
         <>
           {childFolders.length>0&&(
                <Showitem

@@ -5,18 +5,18 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteFile, updateFileData } from "../../../redux/ActionCreators/fileFolderActionCreator";
 
-export default function Header({fileId, fileName,fileData,prevFileData }) {
+export default function Header({setShowSubBar,fileId, fileName,fileData,prevFileData }) {
   const navigate=useNavigate();
- const dispatch =useDispatch()
+ const dispatch =useDispatch();
 
  const handelDeleteFile=(fileId)=>{
   
  if (window.confirm("Are you sure you want to delete this file?")) {
       dispatch(deleteFile(fileId));
-      alert("file Deleted sucessfully");
-      
+      alert("File deleted successfully");
+      setShowSubBar(true); // Set setShowSubBar to true
+      navigate(-1);
     }
-    navigate(-1);
  }
  return (
     <nav className="navbar navbar-expand-lg pb-2 mt-2 py-0 navbar-light bg-white shadow-sm">
@@ -44,7 +44,7 @@ export default function Header({fileId, fileName,fileData,prevFileData }) {
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-dark" onClick={()=>navigate(-1)}>
+          <button className="btn btn-dark" onClick={()=>{navigate(-1); setShowSubBar(true);}}>
             <FontAwesomeIcon icon={faArrowLeftLong}></FontAwesomeIcon> Go Back
           </button>
         </li>

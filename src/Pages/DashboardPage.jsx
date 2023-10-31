@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, json, useLocation, useNavigate } from "react-router-dom";
 import NavbarDash from "../Components/DashboardComponents/NavbarDash";
 import SubBar from "../Components/DashboardComponents/SubBar/SubBar";
 import HomeComponent from "../Components/DashboardComponents/HomeComponent";
@@ -47,13 +47,14 @@ export default function DashboardPage() {
 
   useEffect(()=>{
      if(pathname.includes("/file/")){
-      
+   
       setShowSubBar(false);
      }
      
   },[pathname])
   return (
     <>
+    
       {isCreateFolderModalOpen && (
         <CreateFolder setIsCreateFolderModalOpen={setIsCreateFolderModalOpen} />
       )}
@@ -68,6 +69,7 @@ export default function DashboardPage() {
         showSubBar
         &&(
           <SubBar 
+          setShowSubBar={setShowSubBar}
           setIsCreateFolderModalOpen={setIsCreateFolderModalOpen}
           setIsCreateFileModalOpen={setIsCreateFileModalOpen}
           setIsFileUploadModalOpen={setIsFileUploadModalOpen}
@@ -77,8 +79,8 @@ export default function DashboardPage() {
       
       <Routes>
         <Route path="" element={<HomeComponent/>}></Route>
-        <Route path="/folder/:folderId" element={<FolderComponent/>}></Route>
-        <Route path="/file/:fileId" element={<FileComponent/>}></Route>
+        <Route path="/folder/:folderId" element={<FolderComponent  />}></Route>
+        <Route path="/file/:fileId" element={<FileComponent setShowSubBar={setShowSubBar}/>}></Route>
       </Routes>
     </>
   );
