@@ -73,6 +73,7 @@ export default function SubBar({setShowSubBar, setIsCreateFolderModalOpen,setIsF
         </ol>
       </nav>
       <ul className="navbar-nav ms-auto me-5">
+      
         <li className="nav-item ms-2">
           <button className="btn btn-outline-dark"
            onClick={()=>setIsFileUploadModalOpen(true)}

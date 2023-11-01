@@ -20,11 +20,12 @@ export default function FileComponent({ setShowSubBar }) {
 
   const navigate = useNavigate();
 
-  const { currentFile } = useSelector(
+  const { currentFile,isAuthenticated } = useSelector(
     (state) => ({
       currentFile: state.filefolders.userFiles.find(
         (file) => file.docId === fileId
       ),
+      isAuthenticated:state.auth.isAuthenticated,
     }),
     shallowEqual
   );
@@ -48,7 +49,7 @@ export default function FileComponent({ setShowSubBar }) {
   const handelDeleteFile = (fileId) => {
     if (window.confirm("Are you sure you want to delete this file?")) {
       dispatch(deleteFile(fileId));
-      setShowSubBar(true); // Set setShowSubBar to true
+      setShowSubBar(true); // Set setShowSubBar nto true
       navigate(-1);
       toast.success('File Deleted sucessfully',{
         position:'top-right',
@@ -61,11 +62,16 @@ export default function FileComponent({ setShowSubBar }) {
       setFileData(currentFile.data.data);
       setPrevFileData(currentFile.data.data);
     }
-  }, [currentFile, prevFileData]);
-
+    if(!isAuthenticated){
+      navigate("/")
+    }
+  }, [currentFile, prevFileData,isAuthenticated]);
+ 
+  if(isAuthenticated)
   return (
+    
     <div>
-      {fileData != null ? ( // Check if currentFile exists
+      { isAuthenticated && fileData !== null ? ( // Check if currentFile exists
         <>
           <Header
             setShowSubBar={setShowSubBar}
@@ -148,4 +154,7 @@ export default function FileComponent({ setShowSubBar }) {
       )}
     </div>
   );
+
+  return <div>Login first</div>
+  
 }
