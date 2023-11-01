@@ -67,10 +67,10 @@ export const signUpUser = (name, email, password, setSucess) => (dispatch) => {
         .catch((e) => console.log(e));
     })
     .catch((e) => {
-      if (e.code == "auth/email-already-in-use") {
+      if (e.code === "auth/email-already-in-use") {
         alert("Email already in use");
       }
-      if (e.code == "auth/invalid-e-email") {
+      if (e.code === "auth/invalid-e-email") {
         alert("Invalid email");
       }
     });

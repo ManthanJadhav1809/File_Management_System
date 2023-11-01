@@ -44,7 +44,7 @@ export default function FolderComponent() {
             )
           }
           {
-            uploadedFiles&& uploadedFiles.length>0 &&(
+            uploadedFiles && uploadedFiles.length>0 &&(
               <Showitem
               title={"Uploded Files"}
               type={"file"}

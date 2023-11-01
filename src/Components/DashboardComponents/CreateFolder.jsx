@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { creatFolder } from "../../redux/ActionCreators/fileFolderActionCreator";
+import { toast } from "react-toastify";
 
 export default function CreateFolder({ setIsCreateFolderModalOpen }) {
   const [folderName, setFolderName] = useState("");
-  const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
   const { userFolders, user, currentFolder, currentFolderData } = useSelector(
     (state) => ({

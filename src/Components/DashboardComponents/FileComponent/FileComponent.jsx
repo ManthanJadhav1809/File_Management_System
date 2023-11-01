@@ -48,10 +48,11 @@ export default function FileComponent({ setShowSubBar }) {
   const handelDeleteFile = (fileId) => {
     if (window.confirm("Are you sure you want to delete this file?")) {
       dispatch(deleteFile(fileId));
-      
-
-      // setShowSubBar(true); // Set setShowSubBar to true
-      // navigate(-1);
+      setShowSubBar(true); // Set setShowSubBar to true
+      navigate(-1);
+      toast.success('File Deleted sucessfully',{
+        position:'top-right',
+      })
     }
   };
 
@@ -81,7 +82,7 @@ export default function FileComponent({ setShowSubBar }) {
         </>
       ) : (
         <>
-          <div className="position-fixed w-100 h-100 left-0 top-0 bg-black text-white ">
+          <div className="w-100 h-100 left-0 top-0  text-black ">
             {/* sub menu bar */}
             <div className="d-flex py-4  px-5 justify-content-between align-items-center h-100">
               <p title={currentFile.data.name} className="my-0">
@@ -136,9 +137,9 @@ export default function FileComponent({ setShowSubBar }) {
                 />
               ) : (
                 <div className="w-100 h-100 d-flex justify-content-center align-item-center">
-                  <p className="text-center text-light">
+                  <h3 className="text-center text-black">
                     File Type not supported. Please download file to view it
-                  </p>
+                  </h3>
                 </div>
               )}
             </div>

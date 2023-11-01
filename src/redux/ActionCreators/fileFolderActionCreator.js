@@ -153,7 +153,7 @@ export const updateFileData = (fileId, data) => (dispatch) => {
     });
 };
 
-export const uploadFile = (file, data, setSuccess) => (dispatch) => {
+export const uploadFile = (file, data, setSuccess,setUploadProgress) => (dispatch) => {
   const uploadFileRef = fire.storage().ref(`files/${data.userId}/${data.name}`);
 
   uploadFileRef.put(file).on(
@@ -162,10 +162,12 @@ export const uploadFile = (file, data, setSuccess) => (dispatch) => {
       const progress = Math.round(
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       );
-      console.log("Uploading" + progress + "%");
+      console.log(progress)
+      setUploadProgress(progress);
     },
     (error) => {
       console.log(error);
+      setUploadProgress(0);
     },
     async () => {
       const fileUrl = await uploadFileRef.getDownloadURL();
@@ -196,9 +198,7 @@ export const deleteFile = (fileId) => async (dispatch) => {
     await fire.firestore().collection("files").doc(fileId).delete();
     dispatch(DeleteFolder(fileId));
     dispatch(setLoading(true));
-    toast.success('File Deleted sucessfully',{
-      position:'top-right',
-    })
+    
   } catch (error) {
     toast.error('Error while deleting file',{
       position:'top-right',
